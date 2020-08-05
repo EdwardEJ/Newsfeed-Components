@@ -94,15 +94,33 @@ const data = [
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
 
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  <div class="article">                         //article
+    <h2>{title of the article}</h2>             //titleArticle
+    <p class="date">{date of the article}</p>   //dateArticle
 
-    {three separate paragraph elements}
+    {three separate paragraph elements}         
 
-    <span class="expandButton">+</span>
+    <span class="expandButton">+</span>         //expandBtn
   </div>
+*/
 
+function articleMaker(articleObj) {
+
+  // create elements for the object
+
+  const article = document.createElement('div')
+  const titleArticle = document.createElement('h2')
+  const dateArticle = document.createElement('p')
+  const expandBtn = document.createElement('span')
+
+
+
+
+}
+articleMaker({ title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bar', secondParagraph: 'anotha', thirdParagraph: 'and anotha one' })
+
+
+/*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
