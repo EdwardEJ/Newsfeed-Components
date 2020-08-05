@@ -98,27 +98,54 @@ const data = [
     <h2>{title of the article}</h2>             //titleArticle
     <p class="date">{date of the article}</p>   //dateArticle
 
-    {three separate paragraph elements}         
+    {three separate paragraph elements}         //articleContent
 
     <span class="expandButton">+</span>         //expandBtn
   </div>
 */
 
-function articleMaker(articleObj) {
 
+const articles = document.querySelector('.articles')
+
+function articleMaker(articleObj) {
   // create elements for the object
 
   const article = document.createElement('div')
   const titleArticle = document.createElement('h2')
   const dateArticle = document.createElement('p')
+  const articleContent = document.createElement('p')
   const expandBtn = document.createElement('span')
 
+  // connects elements to each other
 
+  article.appendChild(titleArticle)
+  article.appendChild(dateArticle)
+  article.appendChild(expandBtn)
 
+  //add class names to nested elements
 
+  article.classList.add('article')
+  dateArticle.classList.add('date')
+  expandBtn.classList.add('expandButton')
+
+  titleArticle.textContent = articleObj.title
+  dateArticle.textContent = articleObj.date
+  articleContent.textContent = `${articleObj.firstParagraph}$\n${articleObj.secondParagraph}\n${articleObj.thirdParagraph}`
+  expandBtn.textContent = '+'
+
+  expandBtn.addEventListener('click', e => {
+    
+  })
+
+  return article
 }
-articleMaker({ title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bar', secondParagraph: 'anotha', thirdParagraph: 'and anotha one' })
 
+// articleMaker({ title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bar', secondParagraph: 'anotha', thirdParagraph: 'and anotha one' })
+
+data.forEach(articleObj => {
+  const articlePanel = articleMaker(articleObj)
+  articles.appendChild(articlePanel)
+})
 
 /*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
