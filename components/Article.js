@@ -86,7 +86,8 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  { title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bars', secondParagraph: 'anotha one', thirdParagraph: 'and anotha one' }
 ];
 
 /*
@@ -120,27 +121,29 @@ function articleMaker(articleObj) {
 
   article.appendChild(titleArticle)
   article.appendChild(dateArticle)
+  article.appendChild(articleContent)
   article.appendChild(expandBtn)
 
   //add class names to nested elements
 
   article.classList.add('article')
   dateArticle.classList.add('date')
+  // articleContent.classList.add('')
   expandBtn.classList.add('expandButton')
 
   titleArticle.textContent = articleObj.title
   dateArticle.textContent = articleObj.date
-  articleContent.textContent = `${articleObj.firstParagraph}$\n${articleObj.secondParagraph}\n${articleObj.thirdParagraph}`
+  articleContent.textContent = `${articleObj.firstParagraph}\n${articleObj.secondParagraph}\n${articleObj.thirdParagraph}`
   expandBtn.textContent = '+'
 
   expandBtn.addEventListener('click', e => {
-    
+    article.classList.toggle('article-open')
   })
 
   return article
 }
 
-// articleMaker({ title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bar', secondParagraph: 'anotha', thirdParagraph: 'and anotha one' })
+// articleMaker({ title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bar', secondParagraph: 'anotha one', thirdParagraph: 'and anotha one' })
 
 data.forEach(articleObj => {
   const articlePanel = articleMaker(articleObj)
