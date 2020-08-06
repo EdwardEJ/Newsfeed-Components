@@ -86,7 +86,8 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  { title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bars', secondParagraph: 'anotha one', thirdParagraph: 'and anotha one' }
 ];
 
 /*
@@ -94,15 +95,63 @@ const data = [
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
 
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  <div class="article">                         //article
+    <h2>{title of the article}</h2>             //titleArticle
+    <p class="date">{date of the article}</p>   //dateArticle
 
-    {three separate paragraph elements}
+    {three separate paragraph elements}         //articleContent
 
-    <span class="expandButton">+</span>
+    <span class="expandButton">+</span>         //expandBtn
   </div>
+*/
 
+
+const articles = document.querySelector('.articles')
+
+function articleMaker(articleObj) {
+  // create elements for the object
+
+  const article = document.createElement('div')
+  const titleArticle = document.createElement('h2')
+  const dateArticle = document.createElement('p')
+  const articleContent = document.createElement('p')
+  const expandBtn = document.createElement('span')
+
+  // connects elements to each other
+
+  article.appendChild(titleArticle)
+  article.appendChild(dateArticle)
+  article.appendChild(articleContent)
+  article.appendChild(expandBtn)
+
+  //add class names to nested elements
+
+  article.classList.add('article')
+  dateArticle.classList.add('date')
+  // articleContent.classList.add('')
+  expandBtn.classList.add('expandButton')
+
+  titleArticle.textContent = articleObj.title
+  dateArticle.textContent = articleObj.date
+  articleContent.textContent = `${articleObj.firstParagraph}\n${articleObj.secondParagraph}\n${articleObj.thirdParagraph}`
+  expandBtn.textContent = '+'
+
+
+  expandBtn.addEventListener('click', e => {
+    article.classList.toggle('article-open')
+  })
+
+  return article
+}
+
+// articleMaker({ title: 'foo', date: 'jan 1st, 2019', firstParagraph: 'bar', secondParagraph: 'anotha one', thirdParagraph: 'and anotha one' })
+
+data.forEach(articleObj => {
+  const articlePanel = articleMaker(articleObj)
+  articles.appendChild(articlePanel)
+})
+
+/*
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
